@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+#include <future>
 #include "TrafficLight.h"
 
 /* Implementation of class "MessageQueue" */
@@ -106,7 +107,9 @@ void TrafficLight::cycleThroughPhases()
                       _currentPhase = TrafficLightPhase::red;
               }
 
-              _queue.send (std::move(_currentPhase));
+              auto phase = _currentPhase;
+              auto sent = std::async(std::launch::async, &MessageQueue<TrafficLightPhase>::send, &_queue, std::move(phase));
+              sent.wait();
 
               // reset stop watch for next cycle and generate random cycle duration again
               lastUpdate = std::chrono::system_clock::now();
