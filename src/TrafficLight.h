@@ -81,10 +81,6 @@ private:
 
     MessageQueue<TrafficLightPhase> _queue;
     TrafficLightPhase _currentPhase;
-
-//    std::condition_variable _condition;
-//    std::mutex _mutex;
-
     Random<int> _randomNumber;
 };
 
