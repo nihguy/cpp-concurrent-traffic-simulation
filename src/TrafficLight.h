@@ -12,6 +12,11 @@
 // forward declarations to avoid include cycle
 class Vehicle;
 
+enum class TrafficLightPhase {
+    red,
+    green,
+};
+
 
 // FP.3 Define a class „MessageQueue“ which has the public methods send and receive. 
 // Send should take an rvalue reference of type TrafficLightPhase whereas receive should return this type. 
@@ -21,14 +26,14 @@ class Vehicle;
 template <class T>
 class MessageQueue
 {
- public:
-  T receive();
-  void send(T &&msg);
+public:
+    T receive();
+    void send(T &&msg);
 
- private:
-  std::mutex _mutex;
-  std::condition_variable _condition;
-  std::deque<T> _queue;
+private:
+    std::mutex _mutex;
+    std::condition_variable _condition;
+    std::deque<T> _queue;
 };
 
 // A simple helper class to get random numbers intervals
@@ -58,11 +63,6 @@ public:
     TrafficLight();
     virtual ~TrafficLight () = default;
 
-    enum TrafficLightPhase {
-        red,
-        green,
-    };
-
     // getters / setters
     TrafficLightPhase getCurrentPhase();
 
@@ -82,8 +82,8 @@ private:
     MessageQueue<TrafficLightPhase> _queue;
     TrafficLightPhase _currentPhase;
 
-    std::condition_variable _condition;
-    std::mutex _mutex;
+//    std::condition_variable _condition;
+//    std::mutex _mutex;
 
     Random<int> _randomNumber;
 };

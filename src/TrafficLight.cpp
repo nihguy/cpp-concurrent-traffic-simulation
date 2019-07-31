@@ -60,7 +60,7 @@ void TrafficLight::waitForGreen()
     }
 }
 
-TrafficLight::TrafficLightPhase TrafficLight::getCurrentPhase()
+TrafficLightPhase TrafficLight::getCurrentPhase()
 {
     return _currentPhase;
 }
